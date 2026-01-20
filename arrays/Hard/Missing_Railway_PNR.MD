@@ -129,7 +129,7 @@ Solve this in O(n) time using O(1) extra space.
 ```python
 class Solution:
     def missingPNR(self, pnrList: list[int]) -> int:
-        # Start your solution here
+        # start your solution
         n = len(pnrList)
         
         for i in range(n):
@@ -142,7 +142,7 @@ class Solution:
                 return i + 1
         
         return n + 1
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -168,7 +168,7 @@ using namespace std;
 class Solution {
 public:
     int missingPNR(vector<int>& pnrList) {
-        // Start your solution here
+        // start your solution
         int n = pnrList.size();
         
         for (int i = 0; i < n; i++) {
@@ -184,7 +184,7 @@ public:
         }
         
         return n + 1;
-        // End your solution
+        // end your solution
     }
 };
 
@@ -214,7 +214,7 @@ import java.util.*;
 
 class Solution {
     public int missingPNR(int[] pnrList) {
-        // Start your solution here
+        // start your solution
         int n = pnrList.length;
         
         for (int i = 0; i < n; i++) {
@@ -233,7 +233,7 @@ class Solution {
         }
         
         return n + 1;
-        // End your solution
+        // end your solution
     }
 }
 
@@ -265,12 +265,11 @@ public class Main {
 ```python
 class Solution:
     def missingPNR(self, pnrList: list[int]) -> int:
-        # Start your solution here
+        # start your solution
         
         
         
-        # End your solution
-        pass
+        # end your solution
 
 
 def main():
@@ -296,12 +295,11 @@ using namespace std;
 class Solution {
 public:
     int missingPNR(vector<int>& pnrList) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0;
+        // end your solution
     }
 };
 
@@ -331,12 +329,11 @@ import java.util.*;
 
 class Solution {
     public int missingPNR(int[] pnrList) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0;
+        // end your solution
     }
 }
 
