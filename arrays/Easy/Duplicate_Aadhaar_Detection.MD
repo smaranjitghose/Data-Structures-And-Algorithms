@@ -127,14 +127,14 @@ true
 ```python
 class Solution:
     def hasDuplicate(self, aadhaarNumbers: list[int]) -> bool:
-        # Start your solution here
+        # start your solution
         seen = set()
         for num in aadhaarNumbers:
             if num in seen:
                 return True
             seen.add(num)
         return False
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -161,7 +161,7 @@ using namespace std;
 class Solution {
 public:
     bool hasDuplicate(vector<int>& aadhaarNumbers) {
-        // Start your solution here
+        // start your solution
         unordered_set<int> seen;
         for (int num : aadhaarNumbers) {
             if (seen.find(num) != seen.end()) {
@@ -170,7 +170,7 @@ public:
             seen.insert(num);
         }
         return false;
-        // End your solution
+        // end your solution
     }
 };
 
@@ -200,7 +200,7 @@ import java.util.*;
 
 class Solution {
     public boolean hasDuplicate(int[] aadhaarNumbers) {
-        // Start your solution here
+        // start your solution
         Set<Integer> seen = new HashSet<>();
         for (int num : aadhaarNumbers) {
             if (seen.contains(num)) {
@@ -209,7 +209,7 @@ class Solution {
             seen.add(num);
         }
         return false;
-        // End your solution
+        // end your solution
     }
 }
 
@@ -241,12 +241,11 @@ public class Main {
 ```python
 class Solution:
     def hasDuplicate(self, aadhaarNumbers: list[int]) -> bool:
-        # Start your solution here
+        # start your solution
         
         
         
-        # End your solution
-        pass
+        # end your solution
 
 
 def main():
@@ -273,12 +272,11 @@ using namespace std;
 class Solution {
 public:
     bool hasDuplicate(vector<int>& aadhaarNumbers) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return false;
+        // end your solution
     }
 };
 
@@ -308,12 +306,11 @@ import java.util.*;
 
 class Solution {
     public boolean hasDuplicate(int[] aadhaarNumbers) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return false;
+        // end your solution
     }
 }
 
