@@ -127,7 +127,7 @@ Given an array `elevation` representing the height of road segments in meters, c
 ```python
 class Solution:
     def trappedWater(self, elevation: list[int]) -> int:
-        # Start your solution here
+        # start your solution
         if not elevation:
             return 0
         
@@ -146,7 +146,7 @@ class Solution:
                 water += right_max - elevation[right]
         
         return water
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -173,7 +173,7 @@ using namespace std;
 class Solution {
 public:
     int trappedWater(vector<int>& elevation) {
-        // Start your solution here
+        // start your solution
         if (elevation.empty()) return 0;
         
         int left = 0, right = elevation.size() - 1;
@@ -193,7 +193,7 @@ public:
         }
         
         return water;
-        // End your solution
+        // end your solution
     }
 };
 
@@ -223,7 +223,7 @@ import java.util.*;
 
 class Solution {
     public int trappedWater(int[] elevation) {
-        // Start your solution here
+        // start your solution
         if (elevation.length == 0) return 0;
         
         int left = 0, right = elevation.length - 1;
@@ -243,7 +243,7 @@ class Solution {
         }
         
         return water;
-        // End your solution
+        // end your solution
     }
 }
 
@@ -275,12 +275,11 @@ public class Main {
 ```python
 class Solution:
     def trappedWater(self, elevation: list[int]) -> int:
-        # Start your solution here
+        # start your solution
         
         
         
-        # End your solution
-        pass
+        # end your solution
 
 
 def main():
@@ -307,12 +306,11 @@ using namespace std;
 class Solution {
 public:
     int trappedWater(vector<int>& elevation) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0;
+        // end your solution
     }
 };
 
@@ -342,12 +340,11 @@ import java.util.*;
 
 class Solution {
     public int trappedWater(int[] elevation) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0;
+        // end your solution
     }
 }
 
