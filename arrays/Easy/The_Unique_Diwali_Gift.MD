@@ -133,12 +133,12 @@ Given an array `gifts` of gift box IDs, find the ID of the unique gift box sold 
 ```python
 class Solution:
     def findUniqueGift(self, gifts: list[int]) -> int:
-        # Start your solution here
+        # start your solution
         result = 0
         for gift_id in gifts:
             result ^= gift_id
         return result
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -164,13 +164,13 @@ using namespace std;
 class Solution {
 public:
     int findUniqueGift(vector<int>& gifts) {
-        // Start your solution here
+        // start your solution
         int result = 0;
         for (int giftId : gifts) {
             result ^= giftId;
         }
         return result;
-        // End your solution
+        // end your solution
     }
 };
 
@@ -200,13 +200,13 @@ import java.util.Scanner;
 
 class Solution {
     public int findUniqueGift(int[] gifts) {
-        // Start your solution here
+        // start your solution
         int result = 0;
         for (int giftId : gifts) {
             result ^= giftId;
         }
         return result;
-        // End your solution
+        // end your solution
     }
 }
 
@@ -238,12 +238,11 @@ public class Main {
 ```python
 class Solution:
     def findUniqueGift(self, gifts: list[int]) -> int:
-        # Start your solution here
+        # start your solution
         
         
         
-        # End your solution
-        pass
+        # end your solution
 
 
 def main():
@@ -269,12 +268,11 @@ using namespace std;
 class Solution {
 public:
     int findUniqueGift(vector<int>& gifts) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0;
+        // end your solution
     }
 };
 
@@ -304,12 +302,11 @@ import java.util.Scanner;
 
 class Solution {
     public int findUniqueGift(int[] gifts) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0;
+        // end your solution
     }
 }
 
