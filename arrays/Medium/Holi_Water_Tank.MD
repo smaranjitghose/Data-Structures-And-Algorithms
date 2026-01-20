@@ -129,7 +129,7 @@ Return the maximum water the tank can store. Note that the boards cannot be tilt
 ```python
 class Solution:
     def maxWater(self, heights: list[int]) -> int:
-        # Start your solution here
+        # start your solution
         left, right = 0, len(heights) - 1
         max_area = 0
         
@@ -144,7 +144,7 @@ class Solution:
                 right -= 1
         
         return max_area
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -171,7 +171,7 @@ using namespace std;
 class Solution {
 public:
     int maxWater(vector<int>& heights) {
-        // Start your solution here
+        // start your solution
         int left = 0, right = heights.size() - 1;
         int maxArea = 0;
         
@@ -188,7 +188,7 @@ public:
         }
         
         return maxArea;
-        // End your solution
+        // end your solution
     }
 };
 
@@ -218,7 +218,7 @@ import java.util.*;
 
 class Solution {
     public int maxWater(int[] heights) {
-        // Start your solution here
+        // start your solution
         int left = 0, right = heights.length - 1;
         int maxArea = 0;
         
@@ -235,7 +235,7 @@ class Solution {
         }
         
         return maxArea;
-        // End your solution
+        // end your solution
     }
 }
 
@@ -267,12 +267,11 @@ public class Main {
 ```python
 class Solution:
     def maxWater(self, heights: list[int]) -> int:
-        # Start your solution here
+        # start your solution
         
         
         
-        # End your solution
-        pass
+        # end your solution
 
 
 def main():
@@ -299,12 +298,11 @@ using namespace std;
 class Solution {
 public:
     int maxWater(vector<int>& heights) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0;
+        // end your solution
     }
 };
 
@@ -334,12 +332,11 @@ import java.util.*;
 
 class Solution {
     public int maxWater(int[] heights) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0;
+        // end your solution
     }
 }
 
