@@ -138,7 +138,7 @@ The solution must run in O(log(m+n)) time complexity.
 ```python
 class Solution:
     def findMedian(self, session1: list[int], session2: list[int]) -> float:
-        # Start your solution here
+        # start your solution
         if len(session1) > len(session2):
             session1, session2 = session2, session1
         
@@ -165,7 +165,7 @@ class Solution:
                 low = cut1 + 1
         
         return 0.0
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -197,7 +197,7 @@ using namespace std;
 class Solution {
 public:
     double findMedian(vector<int>& session1, vector<int>& session2) {
-        // Start your solution here
+        // start your solution
         if (session1.size() > session2.size()) {
             swap(session1, session2);
         }
@@ -228,7 +228,7 @@ public:
         }
         
         return 0.0;
-        // End your solution
+        // end your solution
     }
 };
 
@@ -257,7 +257,7 @@ import java.util.*;
 
 class Solution {
     public double findMedian(int[] session1, int[] session2) {
-        // Start your solution here
+        // start your solution
         if (session1.length > session2.length) {
             int[] temp = session1;
             session1 = session2;
@@ -290,7 +290,7 @@ class Solution {
         }
         
         return 0.0;
-        // End your solution
+        // end your solution
     }
 }
 
@@ -324,12 +324,11 @@ public class Main {
 ```python
 class Solution:
     def findMedian(self, session1: list[int], session2: list[int]) -> float:
-        # Start your solution here
+        # start your solution
         
         
         
-        # End your solution
-        pass
+        # end your solution
 
 
 def main():
@@ -361,12 +360,11 @@ using namespace std;
 class Solution {
 public:
     double findMedian(vector<int>& session1, vector<int>& session2) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0.0;
+        // end your solution
     }
 };
 
@@ -395,12 +393,11 @@ import java.util.*;
 
 class Solution {
     public double findMedian(int[] session1, int[] session2) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
-        return 0.0;
+        // end your solution
     }
 }
 
