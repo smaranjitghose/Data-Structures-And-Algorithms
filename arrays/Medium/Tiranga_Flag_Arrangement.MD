@@ -129,7 +129,7 @@ Solve this in one pass using O(1) extra space.
 ```python
 class Solution:
     def arrangeTiranga(self, flags: list[int]) -> None:
-        # Start your solution here
+        # start your solution
         low, mid, high = 0, 0, len(flags) - 1
         
         while mid <= high:
@@ -142,7 +142,7 @@ class Solution:
             else:
                 flags[mid], flags[high] = flags[high], flags[mid]
                 high -= 1
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -168,7 +168,7 @@ using namespace std;
 class Solution {
 public:
     void arrangeTiranga(vector<int>& flags) {
-        // Start your solution here
+        // start your solution
         int low = 0, mid = 0, high = flags.size() - 1;
         
         while (mid <= high) {
@@ -183,7 +183,7 @@ public:
                 high--;
             }
         }
-        // End your solution
+        // end your solution
     }
 };
 
@@ -219,7 +219,7 @@ import java.util.*;
 
 class Solution {
     public void arrangeTiranga(int[] flags) {
-        // Start your solution here
+        // start your solution
         int low = 0, mid = 0, high = flags.length - 1;
         
         while (mid <= high) {
@@ -238,7 +238,7 @@ class Solution {
                 high--;
             }
         }
-        // End your solution
+        // end your solution
     }
 }
 
@@ -277,11 +277,11 @@ public class Main {
 ```python
 class Solution:
     def arrangeTiranga(self, flags: list[int]) -> None:
-        # Start your solution here
+        # start your solution
         
         
         
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -307,11 +307,11 @@ using namespace std;
 class Solution {
 public:
     void arrangeTiranga(vector<int>& flags) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
+        // end your solution
     }
 };
 
@@ -347,11 +347,11 @@ import java.util.*;
 
 class Solution {
     public void arrangeTiranga(int[] flags) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
+        // end your solution
     }
 }
 
