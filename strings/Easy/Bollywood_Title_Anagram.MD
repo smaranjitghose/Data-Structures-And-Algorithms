@@ -25,98 +25,98 @@ Given two strings `original` and `scrambled`, determine if `scrambled` is an ana
 #### Test Case 1
 **Input:**
 ```
-anagram
-nagaram
+dilwale
+lewadil
 ```
 **Output:**
 ```
 true
 ```
-**Explanation:** Both strings contain: a(3), n(1), g(1), r(1), m(1). Valid anagram.
+**Explanation:** Both strings contain: d(1), i(1), l(2), w(1), a(1), e(1). Valid anagram for teaser reveal.
 
 ---
 
 #### Test Case 2
 **Input:**
 ```
-rat
-car
+sholay
+gabbar
 ```
 **Output:**
 ```
 false
 ```
-**Explanation:** "rat" has 't' but "car" has 'c'. Not an anagram.
+**Explanation:** "sholay" and "gabbar" have different character sets. Not an anagram.
 
 ---
 
 #### Test Case 3
 **Input:**
 ```
-listen
-silent
+dhadkan
+khandad
 ```
 **Output:**
 ```
 true
 ```
-**Explanation:** Both contain the same characters rearranged.
+**Explanation:** Both contain the same characters rearranged: d(2), h(1), a(2), k(1), n(1).
 
 ---
 
 #### Test Case 4
 **Input:**
 ```
-hello
-world
+lagaan
+dangal
 ```
 **Output:**
 ```
 false
 ```
-**Explanation:** Completely different characters.
+**Explanation:** "lagaan" has different character frequencies than "dangal".
 
 ---
 
 #### Test Case 5
 **Input:**
 ```
-a
-a
+k
+k
 ```
 **Output:**
 ```
 true
 ```
-**Explanation:** Single character, identical strings.
+**Explanation:** Single character title, identical strings.
 
 ---
 
 #### Test Case 6
 **Input:**
 ```
-ab
-ba
+ra
+ar
 ```
 **Output:**
 ```
 true
 ```
-**Explanation:** Simple two-character anagram.
+**Explanation:** Simple two-character anagram for short title teaser.
 
 ---
 
 #### Test Case 7
 **Input:**
 ```
-aacc
-ccac
+dhoom
+modhi
 ```
 **Output:**
 ```
 false
 ```
-**Explanation:** "aacc" has a(2), c(2). "ccac" has c(3), a(1). Different frequencies.
+**Explanation:** "dhoom" has d(1), h(1), o(2), m(1). "modhi" has m(1), o(1), d(1), h(1), i(1). Different frequencies, not an anagram.
 
 ---
 
