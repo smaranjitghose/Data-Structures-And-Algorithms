@@ -130,7 +130,7 @@ Perform the rotation in-place with O(1) extra space.
 ```python
 class Solution:
     def rotatePlayers(self, players: list[int], k: int) -> None:
-        # Start your solution here
+        # start your solution
         n = len(players)
         k = k % n
         
@@ -143,7 +143,7 @@ class Solution:
         reverse(0, n - 1)
         reverse(0, k - 1)
         reverse(k, n - 1)
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -171,14 +171,14 @@ using namespace std;
 class Solution {
 public:
     void rotatePlayers(vector<int>& players, int k) {
-        // Start your solution here
+        // start your solution
         int n = players.size();
         k = k % n;
         
         reverse(players.begin(), players.end());
         reverse(players.begin(), players.begin() + k);
         reverse(players.begin() + k, players.end());
-        // End your solution
+        // end your solution
     }
 };
 
@@ -214,14 +214,14 @@ import java.util.*;
 
 class Solution {
     public void rotatePlayers(int[] players, int k) {
-        // Start your solution here
+        // start your solution
         int n = players.length;
         k = k % n;
         
         reverse(players, 0, n - 1);
         reverse(players, 0, k - 1);
         reverse(players, k, n - 1);
-        // End your solution
+        // end your solution
     }
     
     private void reverse(int[] arr, int left, int right) {
@@ -271,11 +271,11 @@ public class Main {
 ```python
 class Solution:
     def rotatePlayers(self, players: list[int], k: int) -> None:
-        # Start your solution here
+        # start your solution
         
         
         
-        # End your solution
+        # end your solution
 
 
 def main():
@@ -303,11 +303,11 @@ using namespace std;
 class Solution {
 public:
     void rotatePlayers(vector<int>& players, int k) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
+        // end your solution
     }
 };
 
@@ -343,11 +343,11 @@ import java.util.*;
 
 class Solution {
     public void rotatePlayers(int[] players, int k) {
-        // Start your solution here
+        // start your solution
         
         
         
-        // End your solution
+        // end your solution
     }
 }
 
