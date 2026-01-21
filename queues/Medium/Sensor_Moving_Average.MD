@@ -185,23 +185,21 @@ Operations:
 from collections import deque
 
 class MovingAverage:
+    # start your solution
     def __init__(self, size: int):
-        # start your solution
         self.size = size
         self.queue = deque()
         self.total = 0
-        # end your solution
 
     def next(self, val: int) -> float:
-        # start your solution
         self.queue.append(val)
         self.total += val
-        
+
         if len(self.queue) > self.size:
             self.total -= self.queue.popleft()
-        
+
         return self.total / len(self.queue)
-        # end your solution
+    # end your solution
 
 
 def main():
@@ -218,6 +216,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 ```
 
 #### C++
@@ -229,6 +228,7 @@ if __name__ == "__main__":
 using namespace std;
 
 class MovingAverage {
+    // start your solution
 private:
     int size;
     queue<int> q;
@@ -236,25 +236,22 @@ private:
 
 public:
     MovingAverage(int size) {
-        // start your solution
         this->size = size;
         this->total = 0;
-        // end your solution
     }
-    
+
     double next(int val) {
-        // start your solution
         q.push(val);
         total += val;
-        
+
         if (q.size() > size) {
             total -= q.front();
             q.pop();
         }
-        
+
         return total / q.size();
-        // end your solution
     }
+    // end your solution
 };
 
 int main() {
@@ -275,6 +272,7 @@ int main() {
     
     return 0;
 }
+
 ```
 
 #### Java
@@ -283,30 +281,28 @@ int main() {
 import java.util.*;
 
 class MovingAverage {
+    // start your solution
     private int size;
     private Queue<Integer> queue;
     private double total;
-    
+
     public MovingAverage(int size) {
-        // start your solution
         this.size = size;
         this.queue = new LinkedList<>();
         this.total = 0;
-        // end your solution
     }
     
     public double next(int val) {
-        // start your solution
         queue.offer(val);
         total += val;
-        
+
         if (queue.size() > size) {
             total -= queue.poll();
         }
-        
+
         return total / queue.size();
-        // end your solution
     }
+    // end your solution
 }
 
 public class Main {
@@ -326,6 +322,7 @@ public class Main {
         sc.close();
     }
 }
+
 ```
 
 ---
@@ -338,17 +335,11 @@ public class Main {
 from collections import deque
 
 class MovingAverage:
+    # start your solution
     def __init__(self, size: int):
-        # start your solution
-        
-        # end your solution
 
-    def next(self, val: int) -> float:
-        # start your solution
-        
-        
-        
-        # end your solution
+    def next(self, val: int) -> float:    
+    # end your solution
 
 
 def main():
@@ -376,20 +367,12 @@ if __name__ == "__main__":
 using namespace std;
 
 class MovingAverage {
+// start your solution
 public:
-    MovingAverage(int size) {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    double next(int val) {
-        // start your solution
-        
-        
-        
-        // end your solution
-    }
+    MovingAverage(int size) {}
+    double next(int val) {}
+
+// end your solution
 };
 
 int main() {
@@ -418,19 +401,12 @@ int main() {
 import java.util.*;
 
 class MovingAverage {
-    public MovingAverage(int size) {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public double next(int val) {
-        // start your solution
-        
-        
-        
-        // end your solution
-    }
+    // start your solution
+
+    public MovingAverage(int size) {}
+    public double next(int val) {}
+
+   // end your solution
 }
 
 public class Main {
