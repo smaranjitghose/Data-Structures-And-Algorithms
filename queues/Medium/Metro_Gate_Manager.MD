@@ -217,76 +217,61 @@ true
 
 ```python
 class MyCircularDeque:
+    # start your solution
     def __init__(self, k: int):
-        # start your solution
         self.capacity = k
         self.deque = [0] * k
         self.front = 0
         self.rear = 0
         self.size = 0
-        # end your solution
 
     def insertFront(self, value: int) -> bool:
-        # start your solution
         if self.isFull():
             return False
         self.front = (self.front - 1 + self.capacity) % self.capacity
         self.deque[self.front] = value
         self.size += 1
         return True
-        # end your solution
 
     def insertLast(self, value: int) -> bool:
-        # start your solution
         if self.isFull():
             return False
         self.deque[self.rear] = value
         self.rear = (self.rear + 1) % self.capacity
         self.size += 1
         return True
-        # end your solution
 
     def deleteFront(self) -> bool:
-        # start your solution
         if self.isEmpty():
             return False
         self.front = (self.front + 1) % self.capacity
         self.size -= 1
         return True
-        # end your solution
 
     def deleteLast(self) -> bool:
-        # start your solution
         if self.isEmpty():
             return False
         self.rear = (self.rear - 1 + self.capacity) % self.capacity
         self.size -= 1
         return True
-        # end your solution
 
     def getFront(self) -> int:
-        # start your solution
         if self.isEmpty():
             return -1
         return self.deque[self.front]
-        # end your solution
 
     def getRear(self) -> int:
-        # start your solution
         if self.isEmpty():
             return -1
         return self.deque[(self.rear - 1 + self.capacity) % self.capacity]
-        # end your solution
 
     def isEmpty(self) -> bool:
-        # start your solution
         return self.size == 0
-        # end your solution
 
     def isFull(self) -> bool:
-        # start your solution
         return self.size == self.capacity
-        # end your solution
+    # end your solution
+
 
 
 def main():
@@ -328,6 +313,7 @@ if __name__ == "__main__":
 using namespace std;
 
 class MyCircularDeque {
+    // start your solution
 private:
     vector<int> deque;
     int capacity;
@@ -343,7 +329,7 @@ public:
         rearIdx = 0;
         count = 0;
     }
-    
+
     bool insertFront(int value) {
         if (isFull()) return false;
         frontIdx = (frontIdx - 1 + capacity) % capacity;
@@ -351,7 +337,7 @@ public:
         count++;
         return true;
     }
-    
+
     bool insertLast(int value) {
         if (isFull()) return false;
         deque[rearIdx] = value;
@@ -359,39 +345,41 @@ public:
         count++;
         return true;
     }
-    
+
     bool deleteFront() {
         if (isEmpty()) return false;
         frontIdx = (frontIdx + 1) % capacity;
         count--;
         return true;
     }
-    
+
     bool deleteLast() {
         if (isEmpty()) return false;
         rearIdx = (rearIdx - 1 + capacity) % capacity;
         count--;
         return true;
     }
-    
+
     int getFront() {
         if (isEmpty()) return -1;
         return deque[frontIdx];
     }
-    
+
     int getRear() {
         if (isEmpty()) return -1;
         return deque[(rearIdx - 1 + capacity) % capacity];
     }
-    
+
     bool isEmpty() {
         return count == 0;
     }
-    
+
     bool isFull() {
         return count == capacity;
     }
+    // end your solution
 };
+
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -437,12 +425,13 @@ int main() {
 import java.util.*;
 
 class MyCircularDeque {
+    // start your solution
     private int[] deque;
     private int capacity;
     private int frontIdx;
     private int rearIdx;
     private int count;
-    
+
     public MyCircularDeque(int k) {
         capacity = k;
         deque = new int[k];
@@ -450,7 +439,7 @@ class MyCircularDeque {
         rearIdx = 0;
         count = 0;
     }
-    
+
     public boolean insertFront(int value) {
         if (isFull()) return false;
         frontIdx = (frontIdx - 1 + capacity) % capacity;
@@ -458,7 +447,7 @@ class MyCircularDeque {
         count++;
         return true;
     }
-    
+
     public boolean insertLast(int value) {
         if (isFull()) return false;
         deque[rearIdx] = value;
@@ -466,39 +455,41 @@ class MyCircularDeque {
         count++;
         return true;
     }
-    
+
     public boolean deleteFront() {
         if (isEmpty()) return false;
         frontIdx = (frontIdx + 1) % capacity;
         count--;
         return true;
     }
-    
+
     public boolean deleteLast() {
         if (isEmpty()) return false;
         rearIdx = (rearIdx - 1 + capacity) % capacity;
         count--;
         return true;
     }
-    
+
     public int getFront() {
         if (isEmpty()) return -1;
         return deque[frontIdx];
     }
-    
+
     public int getRear() {
         if (isEmpty()) return -1;
         return deque[(rearIdx - 1 + capacity) % capacity];
     }
-    
+
     public boolean isEmpty() {
         return count == 0;
     }
-    
+
     public boolean isFull() {
         return count == capacity;
     }
+    // end your solution
 }
+
 
 public class Main {
     public static void main(String[] args) {
@@ -544,50 +535,35 @@ public class Main {
 
 ```python
 class MyCircularDeque:
+    # start your solution
     def __init__(self, k: int):
-        # start your solution
-        
-        # end your solution
+        pass
 
     def insertFront(self, value: int) -> bool:
-        # start your solution
-        
-        # end your solution
+        pass
 
     def insertLast(self, value: int) -> bool:
-        # start your solution
-        
-        # end your solution
+        pass
 
     def deleteFront(self) -> bool:
-        # start your solution
-        
-        # end your solution
+        pass
 
     def deleteLast(self) -> bool:
-        # start your solution
-        
-        # end your solution
+        pass
 
     def getFront(self) -> int:
-        # start your solution
-        
-        # end your solution
+        pass
 
     def getRear(self) -> int:
-        # start your solution
-        
-        # end your solution
+        pass
 
     def isEmpty(self) -> bool:
-        # start your solution
-        
-        # end your solution
+        pass
 
     def isFull(self) -> bool:
-        # start your solution
-        
-        # end your solution
+        pass
+    # end your solution
+
 
 
 def main():
@@ -629,61 +605,28 @@ if __name__ == "__main__":
 using namespace std;
 
 class MyCircularDeque {
+    // start your solution
 public:
-    MyCircularDeque(int k) {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    bool insertFront(int value) {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    bool insertLast(int value) {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    bool deleteFront() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    bool deleteLast() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    int getFront() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    int getRear() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    bool isEmpty() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    bool isFull() {
-        // start your solution
-        
-        // end your solution
-    }
+    MyCircularDeque(int k) {}
+
+    bool insertFront(int value) {}
+
+    bool insertLast(int value) {}
+
+    bool deleteFront() {}
+
+    bool deleteLast() {}
+
+    int getFront() {}
+
+    int getRear() {}
+
+    bool isEmpty() {}
+
+    bool isFull() {}
+    // end your solution
 };
+
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -729,60 +672,27 @@ int main() {
 import java.util.*;
 
 class MyCircularDeque {
-    public MyCircularDeque(int k) {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public boolean insertFront(int value) {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public boolean insertLast(int value) {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public boolean deleteFront() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public boolean deleteLast() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public int getFront() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public int getRear() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public boolean isEmpty() {
-        // start your solution
-        
-        // end your solution
-    }
-    
-    public boolean isFull() {
-        // start your solution
-        
-        // end your solution
-    }
+    // start your solution
+    public MyCircularDeque(int k) {}
+
+    public boolean insertFront(int value) {}
+
+    public boolean insertLast(int value) {}
+
+    public boolean deleteFront() {}
+
+    public boolean deleteLast() {}
+
+    public int getFront() {}
+
+    public int getRear() {}
+
+    public boolean isEmpty() {}
+
+    public boolean isFull() {}
+    // end your solution
 }
+
 
 public class Main {
     public static void main(String[] args) {
