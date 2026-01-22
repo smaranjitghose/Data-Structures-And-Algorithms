@@ -1,82 +1,93 @@
-# Kumbh Mela Donation Collection Route
+# JEE Main Cutoff Neighbors
 
 ### Problem Statement
 
-During the Kumbh Mela in Prayagraj, charitable organizations have set up donation collection points across the mela grounds. The layout of these collection points forms a binary tree structure, where each node represents a collection point with a certain amount of donations (which can be positive or negative if expenses exceed collections at that point).
+The National Testing Agency (NTA) stores JEE Main cutoff scores for various engineering colleges in a Binary Search Tree. Each node contains a unique cutoff score, with lower scores in the left subtree and higher scores in the right subtree.
 
-A volunteer can walk along any path in the tree to collect donations. A path is defined as any sequence of nodes where each pair of adjacent nodes has a direct connection. The path must contain at least one node and does not need to pass through the root. The volunteer wants to find the route that maximizes the total donations collected.
+A student with a specific score wants to find the `k` colleges whose cutoff scores are closest to their score. This helps them understand which colleges they're most likely to get admission to, considering both colleges where they just qualify and those where they're slightly below the cutoff.
 
-Given the root of the binary tree representing the donation collection points, return the maximum path sum. A path sum is the sum of the node values in the path.
+Given the root of a BST, a target score, and an integer `k`, return the `k` values in the BST that are closest to the target. The answer can be returned in any order.
 
 ### Input Format
 
 - First line contains the number of nodes `n` in the tree
-- Second line contains `n` space-separated values representing the level-order traversal of the tree, where `-1001` denotes a null node (since valid values are -1000 to 1000)
+- Second line contains `n` space-separated values representing the level-order traversal of the BST, where `-1` denotes a null node
+- Third line contains the target value (can be a decimal)
+- Fourth line contains the integer `k`
 
 ### Output Format
 
-- A single integer representing the maximum path sum
+- Print `k` space-separated integers representing the closest values to target
+- Values can be in any order
 
 ### Constraints
 
-- `1 <= n <= 3 * 10^4`
-- `-1000 <= Node.val <= 1000`
+- `1 <= k <= n <= 10^4`
+- `0 <= Node.val <= 10^9`
 
 ### Test Cases
 
 #### Test Case 1
 **Input:**
 ```
-3
-1 2 3
+5
+4 2 5 1 3
+3.7
+2
 ```
 **Output:**
 ```
-6
+4 3
 ```
-**Explanation:** The optimal path is 2 → 1 → 3 with sum 2 + 1 + 3 = 6.
+**Explanation:** Values closest to 3.7 are 4 (distance 0.3) and 3 (distance 0.7).
 
 ---
 
 #### Test Case 2
 **Input:**
 ```
-5
--10 9 20 -1001 -1001 15 7
+1
+1
+0.0
+1
 ```
 **Output:**
 ```
-42
+1
 ```
-**Explanation:** The optimal path is 15 → 20 → 7 with sum 15 + 20 + 7 = 42.
+**Explanation:** Only one node, so it's the closest.
 
 ---
 
 #### Test Case 3
 **Input:**
 ```
-1
--3
+7
+50 30 70 20 40 60 80
+45.0
+3
 ```
 **Output:**
 ```
--3
+40 50 30
 ```
-**Explanation:** Single negative node - we must include at least one node.
+**Explanation:** Distances: 40→5, 50→5, 30→15, 60→15, 20→25, 70→25, 80→35. Top 3 closest: 40, 50, 30.
 
 ---
 
 #### Test Case 4
 **Input:**
 ```
-3
-2 -1 -2
+5
+4 2 5 1 3
+3.0
+2
 ```
 **Output:**
 ```
-2
+3 2
 ```
-**Explanation:** Best path is just the root node with value 2.
+**Explanation:** Value 3 has distance 0, value 2 has distance 1.
 
 ---
 
@@ -84,27 +95,31 @@ Given the root of the binary tree representing the donation collection points, r
 **Input:**
 ```
 7
-1 2 3 4 5 6 7
+100 50 150 25 75 125 175
+100.0
+4
 ```
 **Output:**
 ```
-18
+100 75 125 50
 ```
-**Explanation:** The optimal path is 4 → 2 → 1 → 3 → 7 or similar with maximum sum.
+**Explanation:** 100 is exact match, then 75 and 125 (distance 25), then 50 (distance 50).
 
 ---
 
 #### Test Case 6
 **Input:**
 ```
-5
-5 4 8 11 -1001 13 4
+3
+2 1 3
+2.5
+3
 ```
 **Output:**
 ```
-48
+2 3 1
 ```
-**Explanation:** Path 11 → 4 → 5 → 8 → 13 gives sum 48.
+**Explanation:** All 3 values returned. Distances: 2→0.5, 3→0.5, 1→1.5.
 
 ---
 
@@ -112,13 +127,15 @@ Given the root of the binary tree representing the donation collection points, r
 **Input:**
 ```
 7
--1 -2 -3 -4 -5 -6 -7
+8 4 12 2 6 10 14
+7.0
+3
 ```
 **Output:**
 ```
--1
+8 6 4
 ```
-**Explanation:** All negative values. The maximum is the root alone with value -1.
+**Explanation:** Distances: 6→1, 8→1, 4→3, 10→3, 12→5, 2→5, 14→7.
 
 ---
 
@@ -126,6 +143,9 @@ Given the root of the binary tree representing the donation collection points, r
 
 #### Python
 ```python
+import heapq
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -134,29 +154,32 @@ class TreeNode:
 
 
 class Solution:
-    def maxPathSum(self, root: TreeNode) -> int:
+    def closestKValues(self, root: TreeNode, target: float, k: int) -> list[int]:
         # start your solution
-        self.max_sum = float('-inf')
+        heap = []
         
-        def max_gain(node: TreeNode) -> int:
+        def inorder(node: TreeNode):
             if not node:
-                return 0
+                return
             
-            left_gain = max(max_gain(node.left), 0)
-            right_gain = max(max_gain(node.right), 0)
+            inorder(node.left)
             
-            path_sum = node.val + left_gain + right_gain
-            self.max_sum = max(self.max_sum, path_sum)
+            diff = abs(node.val - target)
+            if len(heap) < k:
+                heapq.heappush(heap, (-diff, node.val))
+            elif diff < -heap[0][0]:
+                heapq.heappop(heap)
+                heapq.heappush(heap, (-diff, node.val))
             
-            return node.val + max(left_gain, right_gain)
+            inorder(node.right)
         
-        max_gain(root)
-        return self.max_sum
+        inorder(root)
+        return [val for _, val in heap]
         # end your solution
 
 
 def build_tree(values: list) -> TreeNode:
-    if not values or values[0] == -1001:
+    if not values or values[0] == -1:
         return None
     
     root = TreeNode(values[0])
@@ -166,12 +189,12 @@ def build_tree(values: list) -> TreeNode:
     while queue and i < len(values):
         node = queue.pop(0)
         
-        if i < len(values) and values[i] != -1001:
+        if i < len(values) and values[i] != -1:
             node.left = TreeNode(values[i])
             queue.append(node.left)
         i += 1
         
-        if i < len(values) and values[i] != -1001:
+        if i < len(values) and values[i] != -1:
             node.right = TreeNode(values[i])
             queue.append(node.right)
         i += 1
@@ -182,10 +205,15 @@ def build_tree(values: list) -> TreeNode:
 def main():
     n = int(input())
     values = list(map(int, input().split()))
+    target = float(input())
+    k = int(input())
+    
     root = build_tree(values)
     
     sol = Solution()
-    print(sol.maxPathSum(root))
+    result = sol.closestKValues(root, target, k)
+    
+    print(" ".join(map(str, result)))
 
 
 if __name__ == "__main__":
@@ -197,8 +225,7 @@ if __name__ == "__main__":
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <algorithm>
-#include <climits>
+#include <cmath>
 using namespace std;
 
 struct TreeNode {
@@ -210,34 +237,40 @@ struct TreeNode {
 
 class Solution {
 public:
-    int maxSum;
-    
-    int maxPathSum(TreeNode* root) {
+    vector<int> closestKValues(TreeNode* root, double target, int k) {
         // start your solution
-        maxSum = INT_MIN;
-        maxGain(root);
-        return maxSum;
+        priority_queue<pair<double, int>> maxHeap;
+        inorder(root, target, k, maxHeap);
+        
+        vector<int> result;
+        while (!maxHeap.empty()) {
+            result.push_back(maxHeap.top().second);
+            maxHeap.pop();
+        }
+        return result;
     }
     
 private:
-    int maxGain(TreeNode* node) {
-        if (node == nullptr) {
-            return 0;
+    void inorder(TreeNode* node, double target, int k, priority_queue<pair<double, int>>& maxHeap) {
+        if (node == nullptr) return;
+        
+        inorder(node->left, target, k, maxHeap);
+        
+        double diff = abs(node->val - target);
+        if (maxHeap.size() < k) {
+            maxHeap.push({diff, node->val});
+        } else if (diff < maxHeap.top().first) {
+            maxHeap.pop();
+            maxHeap.push({diff, node->val});
         }
         
-        int leftGain = max(maxGain(node->left), 0);
-        int rightGain = max(maxGain(node->right), 0);
-        
-        int pathSum = node->val + leftGain + rightGain;
-        maxSum = max(maxSum, pathSum);
-        
-        return node->val + max(leftGain, rightGain);
+        inorder(node->right, target, k, maxHeap);
         // end your solution
     }
 };
 
 TreeNode* buildTree(vector<int>& values) {
-    if (values.empty() || values[0] == -1001) {
+    if (values.empty() || values[0] == -1) {
         return nullptr;
     }
     
@@ -250,13 +283,13 @@ TreeNode* buildTree(vector<int>& values) {
         TreeNode* node = q.front();
         q.pop();
         
-        if (i < values.size() && values[i] != -1001) {
+        if (i < values.size() && values[i] != -1) {
             node->left = new TreeNode(values[i]);
             q.push(node->left);
         }
         i++;
         
-        if (i < values.size() && values[i] != -1001) {
+        if (i < values.size() && values[i] != -1) {
             node->right = new TreeNode(values[i]);
             q.push(node->right);
         }
@@ -278,10 +311,22 @@ int main() {
         cin >> values[i];
     }
     
+    double target;
+    cin >> target;
+    
+    int k;
+    cin >> k;
+    
     TreeNode* root = buildTree(values);
     
     Solution sol;
-    cout << sol.maxPathSum(root) << endl;
+    vector<int> result = sol.closestKValues(root, target, k);
+    
+    for (int i = 0; i < result.size(); i++) {
+        if (i > 0) cout << " ";
+        cout << result[i];
+    }
+    cout << endl;
     
     return 0;
 }
@@ -299,34 +344,39 @@ class TreeNode {
 }
 
 class Solution {
-    private int maxSum;
-    
-    public int maxPathSum(TreeNode root) {
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
         // start your solution
-        maxSum = Integer.MIN_VALUE;
-        maxGain(root);
-        return maxSum;
+        PriorityQueue<double[]> maxHeap = new PriorityQueue<>((a, b) -> Double.compare(b[0], a[0]));
+        inorder(root, target, k, maxHeap);
+        
+        List<Integer> result = new ArrayList<>();
+        while (!maxHeap.isEmpty()) {
+            result.add((int) maxHeap.poll()[1]);
+        }
+        return result;
     }
     
-    private int maxGain(TreeNode node) {
-        if (node == null) {
-            return 0;
+    private void inorder(TreeNode node, double target, int k, PriorityQueue<double[]> maxHeap) {
+        if (node == null) return;
+        
+        inorder(node.left, target, k, maxHeap);
+        
+        double diff = Math.abs(node.val - target);
+        if (maxHeap.size() < k) {
+            maxHeap.offer(new double[]{diff, node.val});
+        } else if (diff < maxHeap.peek()[0]) {
+            maxHeap.poll();
+            maxHeap.offer(new double[]{diff, node.val});
         }
         
-        int leftGain = Math.max(maxGain(node.left), 0);
-        int rightGain = Math.max(maxGain(node.right), 0);
-        
-        int pathSum = node.val + leftGain + rightGain;
-        maxSum = Math.max(maxSum, pathSum);
-        
-        return node.val + Math.max(leftGain, rightGain);
+        inorder(node.right, target, k, maxHeap);
         // end your solution
     }
 }
 
 public class Main {
     public static TreeNode buildTree(int[] values) {
-        if (values.length == 0 || values[0] == -1001) {
+        if (values.length == 0 || values[0] == -1) {
             return null;
         }
         
@@ -338,13 +388,13 @@ public class Main {
         while (!queue.isEmpty() && i < values.length) {
             TreeNode node = queue.poll();
             
-            if (i < values.length && values[i] != -1001) {
+            if (i < values.length && values[i] != -1) {
                 node.left = new TreeNode(values[i]);
                 queue.offer(node.left);
             }
             i++;
             
-            if (i < values.length && values[i] != -1001) {
+            if (i < values.length && values[i] != -1) {
                 node.right = new TreeNode(values[i]);
                 queue.offer(node.right);
             }
@@ -362,11 +412,20 @@ public class Main {
         for (int i = 0; i < n; i++) {
             values[i] = sc.nextInt();
         }
+        double target = sc.nextDouble();
+        int k = sc.nextInt();
         
         TreeNode root = buildTree(values);
         
         Solution sol = new Solution();
-        System.out.println(sol.maxPathSum(root));
+        List<Integer> result = sol.closestKValues(root, target, k);
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < result.size(); i++) {
+            if (i > 0) sb.append(" ");
+            sb.append(result.get(i));
+        }
+        System.out.println(sb.toString());
         
         sc.close();
     }
@@ -377,6 +436,9 @@ public class Main {
 
 #### Python
 ```python
+import heapq
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -385,7 +447,7 @@ class TreeNode:
 
 
 class Solution:
-    def maxPathSum(self, root: TreeNode) -> int:
+    def closestKValues(self, root: TreeNode, target: float, k: int) -> list[int]:
         # start your solution
         
         
@@ -394,7 +456,7 @@ class Solution:
 
 
 def build_tree(values: list) -> TreeNode:
-    if not values or values[0] == -1001:
+    if not values or values[0] == -1:
         return None
     
     root = TreeNode(values[0])
@@ -404,12 +466,12 @@ def build_tree(values: list) -> TreeNode:
     while queue and i < len(values):
         node = queue.pop(0)
         
-        if i < len(values) and values[i] != -1001:
+        if i < len(values) and values[i] != -1:
             node.left = TreeNode(values[i])
             queue.append(node.left)
         i += 1
         
-        if i < len(values) and values[i] != -1001:
+        if i < len(values) and values[i] != -1:
             node.right = TreeNode(values[i])
             queue.append(node.right)
         i += 1
@@ -420,10 +482,15 @@ def build_tree(values: list) -> TreeNode:
 def main():
     n = int(input())
     values = list(map(int, input().split()))
+    target = float(input())
+    k = int(input())
+    
     root = build_tree(values)
     
     sol = Solution()
-    print(sol.maxPathSum(root))
+    result = sol.closestKValues(root, target, k)
+    
+    print(" ".join(map(str, result)))
 
 
 if __name__ == "__main__":
@@ -435,8 +502,7 @@ if __name__ == "__main__":
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <algorithm>
-#include <climits>
+#include <cmath>
 using namespace std;
 
 struct TreeNode {
@@ -448,7 +514,7 @@ struct TreeNode {
 
 class Solution {
 public:
-    int maxPathSum(TreeNode* root) {
+    vector<int> closestKValues(TreeNode* root, double target, int k) {
         // start your solution
         
         
@@ -458,7 +524,7 @@ public:
 };
 
 TreeNode* buildTree(vector<int>& values) {
-    if (values.empty() || values[0] == -1001) {
+    if (values.empty() || values[0] == -1) {
         return nullptr;
     }
     
@@ -471,13 +537,13 @@ TreeNode* buildTree(vector<int>& values) {
         TreeNode* node = q.front();
         q.pop();
         
-        if (i < values.size() && values[i] != -1001) {
+        if (i < values.size() && values[i] != -1) {
             node->left = new TreeNode(values[i]);
             q.push(node->left);
         }
         i++;
         
-        if (i < values.size() && values[i] != -1001) {
+        if (i < values.size() && values[i] != -1) {
             node->right = new TreeNode(values[i]);
             q.push(node->right);
         }
@@ -499,10 +565,22 @@ int main() {
         cin >> values[i];
     }
     
+    double target;
+    cin >> target;
+    
+    int k;
+    cin >> k;
+    
     TreeNode* root = buildTree(values);
     
     Solution sol;
-    cout << sol.maxPathSum(root) << endl;
+    vector<int> result = sol.closestKValues(root, target, k);
+    
+    for (int i = 0; i < result.size(); i++) {
+        if (i > 0) cout << " ";
+        cout << result[i];
+    }
+    cout << endl;
     
     return 0;
 }
@@ -520,7 +598,7 @@ class TreeNode {
 }
 
 class Solution {
-    public int maxPathSum(TreeNode root) {
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
         // start your solution
         
         
@@ -531,7 +609,7 @@ class Solution {
 
 public class Main {
     public static TreeNode buildTree(int[] values) {
-        if (values.length == 0 || values[0] == -1001) {
+        if (values.length == 0 || values[0] == -1) {
             return null;
         }
         
@@ -543,13 +621,13 @@ public class Main {
         while (!queue.isEmpty() && i < values.length) {
             TreeNode node = queue.poll();
             
-            if (i < values.length && values[i] != -1001) {
+            if (i < values.length && values[i] != -1) {
                 node.left = new TreeNode(values[i]);
                 queue.offer(node.left);
             }
             i++;
             
-            if (i < values.length && values[i] != -1001) {
+            if (i < values.length && values[i] != -1) {
                 node.right = new TreeNode(values[i]);
                 queue.offer(node.right);
             }
@@ -567,11 +645,20 @@ public class Main {
         for (int i = 0; i < n; i++) {
             values[i] = sc.nextInt();
         }
+        double target = sc.nextDouble();
+        int k = sc.nextInt();
         
         TreeNode root = buildTree(values);
         
         Solution sol = new Solution();
-        System.out.println(sol.maxPathSum(root));
+        List<Integer> result = sol.closestKValues(root, target, k);
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < result.size(); i++) {
+            if (i > 0) sb.append(" ");
+            sb.append(result.get(i));
+        }
+        System.out.println(sb.toString());
         
         sc.close();
     }
