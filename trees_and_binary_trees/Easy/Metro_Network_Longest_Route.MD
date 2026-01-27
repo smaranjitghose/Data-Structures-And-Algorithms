@@ -1,12 +1,12 @@
-# Banyan Tree of Panchayat Records
+# Metro Network Longest Route
 
 ### Problem Statement
 
-In a rural village in Tamil Nadu, the panchayat office maintains a hierarchical record system organized as a binary tree structure. Each node represents a record category, with subcategories branching into left and right children. The village administrative officer (VAO) needs to determine the maximum depth of this record hierarchy to plan the digitization process.
+The Delhi Metro Rail Corporation (DMRC) is analyzing its network topology for a new connectivity report. The metro network can be represented as a binary tree where each node is a station, and edges represent direct connections between stations. The planning team wants to find the longest possible route a passenger could take without visiting any station twice.
 
-The depth of the record tree represents the longest chain from the root category (Village Records) down to the most specific subcategory. The VAO needs your help to find this maximum depth.
+The diameter of the metro network is defined as the length of the longest path between any two stations. This path may or may not pass through the central hub (root). The length of a path is measured by the number of edges (connections) between stations.
 
-Given the root of the binary tree representing the panchayat record system, return its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+Given the root of a binary tree representing the metro network, return the length of the diameter of the tree.
 
 ### Input Format
 
@@ -15,11 +15,11 @@ Given the root of the binary tree representing the panchayat record system, retu
 
 ### Output Format
 
-- A single integer representing the maximum depth of the binary tree
+- A single integer representing the diameter (longest path length) of the binary tree
 
 ### Constraints
 
-- `0 <= n <= 10^4`
+- `1 <= n <= 10^4`
 - `-100 <= Node.val <= 100`
 
 ### Test Cases
@@ -27,60 +27,46 @@ Given the root of the binary tree representing the panchayat record system, retu
 #### Test Case 1
 **Input:**
 ```
-7
-3 9 20 -1 -1 15 7
+5
+1 2 3 4 5
 ```
 **Output:**
 ```
 3
 ```
-**Explanation:** The tree has three levels. The longest path goes from root (3) → right child (20) → either child (15 or 7), giving depth 3.
+**Explanation:** The longest path is 4 → 2 → 1 → 3 or 5 → 2 → 1 → 3, both having 3 edges.
 
 ---
 
 #### Test Case 2
 **Input:**
 ```
-3
-1 -1 2
+2
+1 2
 ```
 **Output:**
 ```
-2
+1
 ```
-**Explanation:** The tree has root (1) with only a right child (2). Maximum depth is 2.
+**Explanation:** Only one edge exists between nodes 1 and 2.
 
 ---
 
 #### Test Case 3
 **Input:**
 ```
-0
-
+1
+1
 ```
 **Output:**
 ```
 0
 ```
-**Explanation:** Empty tree has depth 0.
+**Explanation:** Single node has no edges, so diameter is 0.
 
 ---
 
 #### Test Case 4
-**Input:**
-```
-1
-42
-```
-**Output:**
-```
-1
-```
-**Explanation:** Single node tree has depth 1.
-
----
-
-#### Test Case 5
 **Input:**
 ```
 7
@@ -90,35 +76,49 @@ Given the root of the binary tree representing the panchayat record system, retu
 ```
 3
 ```
-**Explanation:** The leftmost path 1 → 2 → 4 (or 1 → 2 → 5) has depth 3.
+**Explanation:** Longest path is 4 → 2 → 1 → 3 or 5 → 2 → 1 → 3 with 3 edges.
+
+---
+
+#### Test Case 5
+**Input:**
+```
+9
+1 2 3 4 5 6 7 8 -1
+```
+**Output:**
+```
+5
+```
+**Explanation:** Longest path is 8 → 4 → 2 → 1 → 3 → 6 or 8 → 4 → 2 → 1 → 3 → 7 with 5 edges.
 
 ---
 
 #### Test Case 6
 **Input:**
 ```
-15
-1 2 3 4 5 6 7 8 -1 -1 -1 -1 -1 -1 -1
+5
+1 2 -1 3 -1 4 -1
 ```
 **Output:**
 ```
-4
+3
 ```
-**Explanation:** The path 1 → 2 → 4 → 8 gives the maximum depth of 4.
+**Explanation:** Left-skewed tree: 4 → 3 → 2 → 1 has 3 edges.
 
 ---
 
 #### Test Case 7
 **Input:**
 ```
-4
-1 -1 2 -1 3
+15
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 ```
 **Output:**
 ```
-3
+6
 ```
-**Explanation:** A skewed tree going right: 1 → 2 → 3 has depth 3.
+**Explanation:** Complete binary tree of 4 levels. Longest path goes from a leaf on one side through root to a leaf on the other side.
 
 ---
 
@@ -134,11 +134,23 @@ class TreeNode:
 
 
 class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
         # start your solution
-        if not root:
-            return 0
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+        self.diameter = 0
+        
+        def height(node: TreeNode) -> int:
+            if not node:
+                return 0
+            
+            left_height = height(node.left)
+            right_height = height(node.right)
+            
+            self.diameter = max(self.diameter, left_height + right_height)
+            
+            return 1 + max(left_height, right_height)
+        
+        height(root)
+        return self.diameter
         # end your solution
 
 
@@ -168,15 +180,11 @@ def build_tree(values: list) -> TreeNode:
 
 def main():
     n = int(input())
-    if n == 0:
-        print(0)
-        return
-    
     values = list(map(int, input().split()))
     root = build_tree(values)
     
     sol = Solution()
-    print(sol.maxDepth(root))
+    print(sol.diameterOfBinaryTree(root))
 
 
 if __name__ == "__main__":
@@ -200,12 +208,27 @@ struct TreeNode {
 
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
+    int diameter;
+    
+    int diameterOfBinaryTree(TreeNode* root) {
         // start your solution
-        if (root == nullptr) {
+        diameter = 0;
+        height(root);
+        return diameter;
+    }
+    
+private:
+    int height(TreeNode* node) {
+        if (node == nullptr) {
             return 0;
         }
-        return 1 + max(maxDepth(root->left), maxDepth(root->right));
+        
+        int leftHeight = height(node->left);
+        int rightHeight = height(node->right);
+        
+        diameter = max(diameter, leftHeight + rightHeight);
+        
+        return 1 + max(leftHeight, rightHeight);
         // end your solution
     }
 };
@@ -247,11 +270,6 @@ int main() {
     int n;
     cin >> n;
     
-    if (n == 0) {
-        cout << 0 << endl;
-        return 0;
-    }
-    
     vector<int> values(n);
     for (int i = 0; i < n; i++) {
         cin >> values[i];
@@ -260,7 +278,7 @@ int main() {
     TreeNode* root = buildTree(values);
     
     Solution sol;
-    cout << sol.maxDepth(root) << endl;
+    cout << sol.diameterOfBinaryTree(root) << endl;
     
     return 0;
 }
@@ -278,12 +296,26 @@ class TreeNode {
 }
 
 class Solution {
-    public int maxDepth(TreeNode root) {
+    private int diameter;
+    
+    public int diameterOfBinaryTree(TreeNode root) {
         // start your solution
-        if (root == null) {
+        diameter = 0;
+        height(root);
+        return diameter;
+    }
+    
+    private int height(TreeNode node) {
+        if (node == null) {
             return 0;
         }
-        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+        
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+        
+        diameter = Math.max(diameter, leftHeight + rightHeight);
+        
+        return 1 + Math.max(leftHeight, rightHeight);
         // end your solution
     }
 }
@@ -322,13 +354,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         int n = sc.nextInt();
-        
-        if (n == 0) {
-            System.out.println(0);
-            sc.close();
-            return;
-        }
-        
         int[] values = new int[n];
         for (int i = 0; i < n; i++) {
             values[i] = sc.nextInt();
@@ -337,7 +362,7 @@ public class Main {
         TreeNode root = buildTree(values);
         
         Solution sol = new Solution();
-        System.out.println(sol.maxDepth(root));
+        System.out.println(sol.diameterOfBinaryTree(root));
         
         sc.close();
     }
@@ -356,7 +381,7 @@ class TreeNode:
 
 
 class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
         # start your solution
         
         
@@ -390,15 +415,11 @@ def build_tree(values: list) -> TreeNode:
 
 def main():
     n = int(input())
-    if n == 0:
-        print(0)
-        return
-    
     values = list(map(int, input().split()))
     root = build_tree(values)
     
     sol = Solution()
-    print(sol.maxDepth(root))
+    print(sol.diameterOfBinaryTree(root))
 
 
 if __name__ == "__main__":
@@ -422,7 +443,7 @@ struct TreeNode {
 
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
+    int diameterOfBinaryTree(TreeNode* root) {
         // start your solution
         
         
@@ -468,11 +489,6 @@ int main() {
     int n;
     cin >> n;
     
-    if (n == 0) {
-        cout << 0 << endl;
-        return 0;
-    }
-    
     vector<int> values(n);
     for (int i = 0; i < n; i++) {
         cin >> values[i];
@@ -481,7 +497,7 @@ int main() {
     TreeNode* root = buildTree(values);
     
     Solution sol;
-    cout << sol.maxDepth(root) << endl;
+    cout << sol.diameterOfBinaryTree(root) << endl;
     
     return 0;
 }
@@ -499,7 +515,7 @@ class TreeNode {
 }
 
 class Solution {
-    public int maxDepth(TreeNode root) {
+    public int diameterOfBinaryTree(TreeNode root) {
         // start your solution
         
         
@@ -542,13 +558,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         int n = sc.nextInt();
-        
-        if (n == 0) {
-            System.out.println(0);
-            sc.close();
-            return;
-        }
-        
         int[] values = new int[n];
         for (int i = 0; i < n; i++) {
             values[i] = sc.nextInt();
@@ -557,7 +566,7 @@ public class Main {
         TreeNode root = buildTree(values);
         
         Solution sol = new Solution();
-        System.out.println(sol.maxDepth(root));
+        System.out.println(sol.diameterOfBinaryTree(root));
         
         sc.close();
     }
