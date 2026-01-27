@@ -158,10 +158,8 @@ class Codec:
             result.pop()
         
         return ",".join(result)
-        # end your solution
 
     def deserialize(self, data: str) -> TreeNode:
-        # start your solution
         if not data:
             return None
         
@@ -259,6 +257,7 @@ if __name__ == "__main__":
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <string>
 #include <sstream>
 using namespace std;
 
@@ -307,7 +306,6 @@ public:
     }
 
     TreeNode* deserialize(string data) {
-        // start your solution
         if (data.empty()) {
             return nullptr;
         }
@@ -457,7 +455,7 @@ class Codec {
             return "";
         }
         
-        StringBuilder sb = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         
@@ -465,31 +463,25 @@ class Codec {
             TreeNode node = queue.poll();
             
             if (node != null) {
-                sb.append(node.val).append(",");
+                result.append(node.val).append(",");
                 queue.offer(node.left);
                 queue.offer(node.right);
             } else {
-                sb.append("null,");
+                result.append("null,");
             }
         }
         
-        String result = sb.toString();
-        while (result.endsWith("null,") || result.endsWith(",")) {
-            if (result.endsWith(",")) {
-                result = result.substring(0, result.length() - 1);
-            }
-            if (result.endsWith("null")) {
-                result = result.substring(0, result.length() - 4);
-            } else {
-                break;
-            }
+        String str = result.toString();
+        while (str.endsWith("null,") || str.endsWith(",")) {
+            if (str.endsWith(",")) str = str.substring(0, str.length() - 1);
+            if (str.endsWith("null")) str = str.substring(0, str.length() - 4);
+            else break;
         }
         
-        return result;
+        return str;
     }
 
     public TreeNode deserialize(String data) {
-        // start your solution
         if (data == null || data.isEmpty()) {
             return null;
         }
@@ -630,12 +622,8 @@ class Codec:
         # start your solution
         
         
-        
-        # end your solution
 
     def deserialize(self, data: str) -> TreeNode:
-        # start your solution
-        
         
         
         # end your solution
@@ -713,6 +701,7 @@ if __name__ == "__main__":
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <string>
 #include <sstream>
 using namespace std;
 
@@ -729,13 +718,9 @@ public:
         // start your solution
         
         
-        
-        // end your solution
     }
 
     TreeNode* deserialize(string data) {
-        // start your solution
-        
         
         
         // end your solution
@@ -851,13 +836,9 @@ class Codec {
         // start your solution
         
         
-        
-        // end your solution
     }
 
     public TreeNode deserialize(String data) {
-        // start your solution
-        
         
         
         // end your solution
